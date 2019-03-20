@@ -1,5 +1,5 @@
 {
 	"watch": ["*"],
 	"ext": "ts",
-	"exec": "yarn build && yarn start"
+	"exec": "yarn format && yarn build && yarn start"
 }

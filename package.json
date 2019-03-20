@@ -12,11 +12,13 @@
 	"dependencies": {
 		"discord-akairo": "^7.5.5",
 		"discord.js": "^11.4.2",
+		"ramda": "^0.26.1",
 		"sequelize": "^5.1.0",
 		"sqlite": "^3.0.2"
 	},
 	"devDependencies": {
 		"@types/node": "^11.11.3",
+		"@types/ramda": "^0.26.3",
 		"nodemon": "^1.18.10",
 		"prettier": "^1.16.4",
 		"tslint": "^5.14.0",

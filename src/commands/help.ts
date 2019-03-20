@@ -1,5 +1,6 @@
 import { Command } from 'discord-akairo'
 import { Message, RichEmbedOptions } from 'discord.js'
+import * as R from 'ramda'
 import { findCommand } from '../utils/index'
 
 export default class extends Command {
@@ -15,14 +16,17 @@ export default class extends Command {
 		{ channel }: Message,
 		{ command: commandName }: any
 	): Promise<Message | Message[]> {
-		const modules = this.client.commandHandler.modules
+		const modules = [...this.client.commandHandler.modules.values()]
 		if (!commandName) {
 			// Send all available commands embed
-			const commands = modules
-				.map(cmd => `__${cmd.id}__ => ${cmd.description}`)
-				.join('\n')
+			const getCommands = R.pipe(
+				R.map((cmd: Command) => `__${cmd.id}__ => ${cmd.description}`),
+				R.join('\n')
+			)
 
-			return channel.send({ embed: this.availableCommandsEmbed(commands) })
+			return channel.send({
+				embed: this.availableCommandsEmbed(getCommands(modules)),
+			})
 		}
 
 		// Send information about the command
@@ -58,7 +62,9 @@ export default class extends Command {
 		description,
 		args,
 	}: Command): RichEmbedOptions {
-		const argumentsStr = args ? args.map(arg => arg.id).join(', ') : 'None'
+		const argumentsStr = R.isEmpty(args)
+			? 'None'
+			: args.map(arg => arg.id).join(', ')
 		return {
 			description,
 			fields: [
