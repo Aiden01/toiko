@@ -9,7 +9,9 @@ COPY . /toiko
 # install dependencies
 RUN yarn install
 
+# build
+RUN yarn build
 
 
 # start the bot
-CMD ["yarn", "start"]
+CMD yarn start
