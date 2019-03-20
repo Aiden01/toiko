@@ -1,7 +1,7 @@
 import { Command } from 'discord-akairo'
 import { Message, RichEmbedOptions } from 'discord.js'
 import * as R from 'ramda'
-import { findCommand } from '../utils/index'
+import { buildCommandHelp } from '../utils/index'
 
 export default class extends Command {
 	constructor() {
@@ -16,7 +16,8 @@ export default class extends Command {
 		{ channel }: Message,
 		{ command: commandName }: any
 	): Promise<Message | Message[]> {
-		const modules = [...this.client.commandHandler.modules.values()]
+		const commandHandler = this.client.commandHandler
+		const modules = [...commandHandler.modules.values()]
 		if (!commandName) {
 			// Send all available commands embed
 			const getCommands = R.pipe(
@@ -30,12 +31,12 @@ export default class extends Command {
 		}
 
 		// Send information about the command
-		const command = findCommand(commandName, modules)
+		const command = commandHandler.findCommand(commandName)
 		if (!command) {
 			return channel.send(`Command ${commandName} not found.`)
 		}
 
-		return channel.send({ embed: this.commandUsageEmbed(command) })
+		return channel.send({ embed: buildCommandHelp(command) })
 	}
 
 	/**
@@ -52,33 +53,6 @@ export default class extends Command {
 				},
 			],
 			title: '(╯°□°）╯︵ ┻━┻',
-		}
-	}
-
-	private commandUsageEmbed({
-		id,
-		userPermissions,
-		aliases,
-		description,
-		args,
-	}: Command): RichEmbedOptions {
-		const argumentsStr = R.isEmpty(args)
-			? 'None'
-			: args.map(arg => arg.id).join(', ')
-		return {
-			description,
-			fields: [
-				{
-					name: 'Aliases',
-					value: aliases.join(', '),
-				},
-				{ name: 'Arguments', value: argumentsStr },
-				{
-					name: 'Required permissions',
-					value: userPermissions ? userPermissions.toString() : 'None',
-				},
-			],
-			title: id,
 		}
 	}
 }

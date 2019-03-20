@@ -6,7 +6,7 @@ const client = new AkairoClient(
     allowMention: true,
     commandDirectory: './dist/src/commands/',
     ownerID: '337364150080503809',
-    prefix: '@',
+    prefix: '?',
   },
   {
     disableEveryone: true,
