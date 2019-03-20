@@ -6,7 +6,7 @@ const client = new AkairoClient(
     allowMention: true,
     commandDirectory: './dist/src/commands/',
     ownerID: '337364150080503809',
-    prefix: '?',
+    prefix: '@',
   },
   {
     disableEveryone: true,
@@ -14,6 +14,7 @@ const client = new AkairoClient(
 )
 
 
-client.login(TOKEN)
-
-  .then(() => console.log("Client is logged"))
+client
+	.login(TOKEN)
+	/* tslint:disable */
+	.then(() => console.log('Client is logged'))

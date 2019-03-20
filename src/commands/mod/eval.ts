@@ -19,6 +19,8 @@ export default class extends Command {
 		{ channel }: Message,
 		{ code }: any
 	): Promise<Message | Message[]> {
-		return channel.send(`Result: \n${eval(code)}`, { code: true })
+		/* tslint:disable */
+		const result = eval(code)
+		return channel.send(`Result: \n${result}`, { code: true })
 	}
 }
