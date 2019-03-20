@@ -6,7 +6,8 @@
 	"scripts": {
 		"format": "npx prettier --write src/**/*.ts",
 		"build": "npx tsc",
-		"start": "yarn build && node dist/src/index.js"
+		"start": "node dist/src/index.js",
+		"dev": "npx nodemon"
 	},
 	"dependencies": {
 		"discord-akairo": "^7.5.5",
@@ -16,6 +17,7 @@
 	},
 	"devDependencies": {
 		"@types/node": "^11.11.3",
+		"nodemon": "^1.18.10",
 		"prettier": "^1.16.4",
 		"tslint": "^5.14.0",
 		"tslint-config-prettier": "^1.18.0",
