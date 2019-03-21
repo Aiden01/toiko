@@ -12,7 +12,7 @@ export default class extends Command {
 	}
 
 	public condition({ author }: Message): boolean {
-		return this.client.ownerID.includes(author.id)
+		return !this.client.ownerID.includes(author.id)
 	}
 
 	public exec(
