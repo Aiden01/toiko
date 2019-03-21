@@ -21,7 +21,7 @@ npm install
 yarn install
 ```
 
-### 3. Rename ``config.example.json`` to ``config.json`` and add your token
+### 3. Rename ``config.example.json`` to ``config.json`` and replace the values with your actual credentials
 
 ### 4. Start the bot
 ```
