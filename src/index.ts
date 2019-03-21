@@ -1,20 +1,20 @@
-import { AkairoClient } from 'discord-akairo'
 import { TOKEN } from '../config.json'
+import { ToikoClient } from './client'
 
-const client = new AkairoClient(
-  {
-    allowMention: true,
-    commandDirectory: './dist/src/commands/',
-    ownerID: '337364150080503809',
-    prefix: '?',
-  },
-  {
-    disableEveryone: true,
-  }
+const client = new ToikoClient(
+	{
+		allowMention: true,
+		commandDirectory: './dist/src/commands/',
+		ownerID: '337364150080503809',
+		prefix: '?',
+	},
+	{
+		disableEveryone: true,
+	}
 )
 
 
 client
-	.login(TOKEN)
+	.start(TOKEN)
 	/* tslint:disable */
 	.then(() => console.log('Client is logged'))

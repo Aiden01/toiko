@@ -1,3 +1,6 @@
 {
-    "TOKEN": "your token here"
+	"TOKEN": "your token here",
+	"POSTGRES_USER": "",
+	"POSTGRES_PASSWORD": "",
+	"POSTGRES_DATABASE": ""
 }
