@@ -1,4 +1,7 @@
-config.json
-node_modules
-.vscode
+.idea/
+.vscode/
+node_modules/
+tmp/
+temp/
+ormconfig.json
 dist
