@@ -6,3 +6,4 @@ temp/
 ormconfig.json
 dist
 config.json
+build
