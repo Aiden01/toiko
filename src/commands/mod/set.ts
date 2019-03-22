@@ -17,9 +17,9 @@ export default class extends Command {
 
     }
     public exec({ guild, channel }: Message, { settingName, settingValue }: any): Promise<Message | Message[]> {
-        const client = this.client as ToikoClient
-        client.settings.set(guild.id, settingName, settingValue)
-        return channel.send(`${settingName} has been set to ${settingValue}.`)
+        // const client = this.client as ToikoClient
+        // client.settings.set(guild.id, settingName, settingValue)
+        return channel.send('pass')
 
     }
 }
