@@ -40,3 +40,9 @@ export const createMacro = (
  */
 export const getMacro = (query: IMacro, connection: Connection) =>
 	connection.getRepository(Macro).findOne({ ...query })
+
+/**
+ * Returns all macros of the given guild
+ */
+export const getAllMacros = (guildId: string, connection: Connection) =>
+	connection.getRepository(Macro).find({ guildId })
