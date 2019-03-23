@@ -41,7 +41,6 @@ export default class extends Command {
 				description:
 					'Type $help <command> to get more information about a command',
 				fields: commands,
-				title: '(╯°□°）╯︵ ┻━┻',
 			})
 
 			return channel.send({
