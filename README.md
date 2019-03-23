@@ -43,9 +43,30 @@ yarn build
 - Docker
 > WIP
 
+## Adding custom commands (Macro)
+
+Toiko allows you to add custom commands, aka macro. It can be done with ``$addmacro``.
+```
+$addmacro <category> <name> <response>
+```
+
+For example, this will add a macro named ``hello`` in the category ``fun`` and the bot will respond with ``Hello, world!``.
+
+```
+$addmacro fun hello Hello, world!
+$hello 
+> Hello, world!
+```
+
+You can get a list of all available macros in your server using ``$listmacros``.
+
+They can also be edited and removed with ``$editmacro`` and ``$removemacro``.
+
 ## Relevant links
 * [Discord.js documentation](http://discord.js.org)
 * [Discord-akairo (command framework)](https://github.com/1Computer1/discord-akairo)
+
+Feel free to submit PRs if you see any issues or you want to improve the bot!
 
 
 
