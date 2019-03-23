@@ -1,6 +1,6 @@
 import { Command } from "discord-akairo";
 import { Message, RichEmbedOptions } from 'discord.js'
-import { getUserMention } from "../../utils";
+import { getUserMention, isModerator } from "../../utils";
 
 
 export default class extends Command {
@@ -8,7 +8,7 @@ export default class extends Command {
         super('warn', {
             aliases: ['warn'],
             args: [
-                { type: 'user', id: 'target' },
+                { type: 'member', id: 'target' },
                 { type: 'string', id: 'reason', match: 'rest' }
             ],
             category: 'mod',
@@ -27,12 +27,17 @@ export default class extends Command {
             return channel.send('Please, specify a reason.')
         }
 
+        if (isModerator(target)) {
+            return channel.send('Cannot warn a moderator.')
+        }
+
         const embed: RichEmbedOptions = {
             description: 'If you think this is an error, please contact the mods or admins.',
             fields: [{ name: 'Reason', value: reason }],
             timestamp: new Date(),
             title: 'You have been warned.',
         }
+        
 
         try {
             await target.send({ embed })

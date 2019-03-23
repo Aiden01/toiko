@@ -7,6 +7,21 @@ import * as R from 'ramda'
  */
 export const getUserMention = (user: User | GuildMember) => `<@${user.id}>`
 
+const moderatorPermissions = [
+	'BAN_MEMBERS',
+	'KICK_MEMBERS',
+	'MANAGE_CHANNELS',
+	'ADMINISTRATOR',
+	'MANAGE_MESSAGES',
+]
+
+/**
+ * Verifies if a user is moderator
+ */
+export const isModerator = ({ permissions }: GuildMember) =>
+	permissions
+		.toArray()
+		.some(permission => moderatorPermissions.includes(permission))
 /**
  * Returns the help embed for the given command
  */
