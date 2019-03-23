@@ -31,7 +31,7 @@ export const buildCommandHelp = (
 	client: Client
 ) => {
 	return buildEmbed(user, client, {
-		description,
+		description: description.content,
 		fields: [
 			{
 				name: 'Aliases',
@@ -40,6 +40,14 @@ export const buildCommandHelp = (
 			{
 				name: 'Required permissions',
 				value: userPermissions ? userPermissions.toString() : 'None',
+			},
+			{
+				name: 'Example',
+				value: description.example || 'Not available',
+			},
+			{
+				name: 'Usage',
+				value: description.usage || 'Not available',
 			},
 		],
 		title: id,

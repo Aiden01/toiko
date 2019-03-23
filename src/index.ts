@@ -1,20 +1,14 @@
 import 'reflect-metadata'
-import { createConnection } from "typeorm";
-import { POSTGRES_DATABASE, POSTGRES_PASSWORD, POSTGRES_USER, TOKEN } from '../config.json'
+import { createConnection } from 'typeorm'
+import {
+	POSTGRES_DATABASE,
+	POSTGRES_PASSWORD,
+	POSTGRES_USER,
+	TOKEN,
+} from '../config.json'
 import { ToikoClient } from './client'
 
-const client = new ToikoClient(
-	{
-		allowMention: true,
-		commandDirectory: './build/src/commands/',
-		listenerDirectory: './build/src/listeners/',
-		ownerID: '337364150080503809',
-		prefix: '?',
-	},
-	{
-		disableEveryone: true,
-	}
-)
+const client = new ToikoClient({ ownerID: ['337364150080503809'] })
 /* tslint:disable */
 createConnection({
 	database: POSTGRES_DATABASE,
@@ -27,9 +21,7 @@ createConnection({
 	username: POSTGRES_USER,
 })
 	.then(connection => {
-		client
-			.start(TOKEN, connection)
-			.then(() => console.log('Client is logged'))
+		client.start(TOKEN, connection).then(() => console.log('Client is logged'))
 	})
 
 	.catch(error => console.log(error))

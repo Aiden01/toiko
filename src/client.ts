@@ -1,4 +1,4 @@
-import { AkairoClient, CommandHandler, ListenerHandler } from 'discord-akairo'
+import { AkairoClient, AkairoOptions, CommandHandler, ListenerHandler } from 'discord-akairo'
 import * as path from 'path'
 import { Connection } from 'typeorm';
 
@@ -7,8 +7,10 @@ export class ToikoClient extends AkairoClient {
 	public commandHandler: CommandHandler
 	public listenerHandler: ListenerHandler
 
-	constructor(options: any, clientOptions: any) {
-		super(options, clientOptions)
+	constructor(options: AkairoOptions) {
+		super(options, {
+				disableEveryone: true,
+		})
 		this.commandHandler = new CommandHandler(this, {
 			allowMention: true,
 			commandUtil: true,
