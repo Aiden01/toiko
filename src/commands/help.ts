@@ -1,6 +1,5 @@
 import { Command } from 'discord-akairo'
 import { Message, RichEmbedOptions } from 'discord.js'
-import * as R from 'ramda'
 import { buildCommandHelp } from '../utils/embed'
 
 export default class extends Command {
@@ -12,31 +11,31 @@ export default class extends Command {
 		})
 	}
 
-	public exec(
-		{ channel }: Message,
+	public async exec(
+		{ channel, author }: Message,
 		{ command: commandName }: any
 	): Promise<Message | Message[]> {
-		const commandHandler = this.client.commandHandler
-		const modules = [...commandHandler.modules.values()]
+		const modules = [...this.handler.modules.values()]
 		if (!commandName) {
 			// Send all available commands embed
-			const getCommands = R.pipe(
-				R.map((cmd: Command) => `__${cmd.id}__ => ${cmd.description}`),
-				R.join('\n')
-			)
+			const commands = modules
+				.map((cmd: Command) => `__${cmd.id}__ => ${cmd.description.content}`)
+				.join('\n')
 
 			return channel.send({
-				embed: this.availableCommandsEmbed(getCommands(modules)),
+				embed: this.availableCommandsEmbed(commands),
 			})
 		}
 
 		// Send information about the command
-		const command = commandHandler.findCommand(commandName)
+		const command = this.handler.findCommand(commandName)
 		if (!command) {
 			return channel.send(`Command ${commandName} not found.`)
 		}
-
-		return channel.send({ embed: buildCommandHelp(command) })
+		const embed = await buildCommandHelp(command, author, this.client)
+		return channel.send({
+			embed,
+		})
 	}
 
 	/**

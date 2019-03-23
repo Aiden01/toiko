@@ -7,7 +7,7 @@ export default class extends Listener {
 	constructor() {
 		super('guildCreate', {
 			emitter: 'client',
-			eventName: 'guildCreate',
+			event: 'guildCreate',
 		})
 	}
 

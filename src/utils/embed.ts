@@ -1,6 +1,5 @@
 import { Command } from 'discord-akairo'
 import { Client, GuildMember, RichEmbedOptions, User } from 'discord.js'
-import * as R from 'ramda'
 import { EMBEDS_COLOR } from '../../config.json'
 
 /**
@@ -27,16 +26,10 @@ export const buildEmbed = async (
  * Returns the help embed for the given command
  */
 export const buildCommandHelp = (
-	{ args, description, aliases, userPermissions, id }: Command,
+	{ description, aliases, userPermissions, id }: Command,
 	user: User | GuildMember,
 	client: Client
 ) => {
-	const getArguments = R.isEmpty(args)
-		? R.always('None')
-		: R.compose(
-				R.join('\n'),
-				R.map(R.prop('id'))
-		  )
 	return buildEmbed(user, client, {
 		description,
 		fields: [
@@ -44,7 +37,6 @@ export const buildCommandHelp = (
 				name: 'Aliases',
 				value: aliases.join(', '),
 			},
-			{ name: 'Arguments', value: getArguments(args) },
 			{
 				name: 'Required permissions',
 				value: userPermissions ? userPermissions.toString() : 'None',
