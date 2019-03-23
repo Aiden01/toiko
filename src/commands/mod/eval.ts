@@ -9,6 +9,7 @@ export default class extends Command {
             args: [
                 { id: 'code', match: 'rest', type: 'string' }
             ],
+            category: 'mod',
             description: {
 				content: 'Evaluates the given javascript code.',
 				example: '1 + 1',

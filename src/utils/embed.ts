@@ -15,7 +15,7 @@ export const buildEmbed = async (
 	return {
 		...restOptions,
 		author: {
-			iconURL: displayAvatarURL,
+			icon_url: displayAvatarURL,
 			name: username,
 		},
 		color: parseInt(EMBEDS_COLOR.slice(1), 16),

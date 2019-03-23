@@ -1,6 +1,7 @@
 import { Command } from 'discord-akairo'
 import { Message, RichEmbedOptions } from 'discord.js'
-import { buildCommandHelp } from '../utils/embed'
+import { getCommandsInCategory } from '../utils/command'
+import { buildCommandHelp, buildEmbed } from '../utils/embed'
 
 export default class extends Command {
 	constructor() {
@@ -15,20 +16,41 @@ export default class extends Command {
 		{ channel, author }: Message,
 		{ command: commandName }: any
 	): Promise<Message | Message[]> {
-		const modules = [...this.handler.modules.values()]
+		const handler = this.handler
 		if (!commandName) {
 			// Send all available commands embed
-			const commands = modules
-				.map((cmd: Command) => `__${cmd.id}__ => ${cmd.description.content}`)
-				.join('\n')
+			const [, ...categories] = [...handler.categories.values()].map(
+				category => category.id
+			)
+			const commands = categories.map(category => {
+				const cmds = getCommandsInCategory(category, handler.modules)
+				const commandsString = cmds
+					.map(
+						(cmd: Command) =>
+							`${cmd.id} => ${cmd.description.content || cmd.description}`
+					)
+					.join('\n')
+
+				return {
+					name: `**${category}**`,
+					value: commandsString,
+				}
+			})
+
+			const commandsEmbed = await buildEmbed(author, this.client, {
+				description:
+					'Type $help <command> to get more information about a command',
+				fields: commands,
+				title: '(╯°□°）╯︵ ┻━┻',
+			})
 
 			return channel.send({
-				embed: this.availableCommandsEmbed(commands),
+				embed: commandsEmbed,
 			})
 		}
 
 		// Send information about the command
-		const command = this.handler.findCommand(commandName)
+		const command = handler.findCommand(commandName)
 		if (!command) {
 			return channel.send(`Command ${commandName} not found.`)
 		}
@@ -36,22 +58,5 @@ export default class extends Command {
 		return channel.send({
 			embed,
 		})
-	}
-
-	/**
-	 * Returns the embed for all available commands
-	 */
-	private availableCommandsEmbed(commands: string): RichEmbedOptions {
-		return {
-			description:
-				'Type ?help <command> to get more information about a command',
-			fields: [
-				{
-					name: 'Available commands',
-					value: commands,
-				},
-			],
-			title: '(╯°□°）╯︵ ┻━┻',
-		}
 	}
 }
