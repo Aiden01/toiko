@@ -1,7 +1,7 @@
 import { Command } from 'discord-akairo'
 import { Message, RichEmbedOptions } from 'discord.js'
 import * as R from 'ramda'
-import { buildCommandHelp } from '../utils/index'
+import { buildCommandHelp } from '../utils/embed'
 
 export default class extends Command {
 	constructor() {
