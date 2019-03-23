@@ -1,27 +1,25 @@
 import { Command } from 'discord-akairo'
-import { GuildMember, User } from 'discord.js'
+import { Client, GuildMember, User } from 'discord.js'
 import * as R from 'ramda'
 
 /**
- * Returns mention string from a user
+ * Builds an embed with default fields
  */
-export const getUserMention = (user: User | GuildMember) => `<@${user.id}>`
-
-const moderatorPermissions = [
-	'BAN_MEMBERS',
-	'KICK_MEMBERS',
-	'MANAGE_CHANNELS',
-	'ADMINISTRATOR',
-	'MANAGE_MESSAGES',
-]
-
-/**
- * Verifies if a user is moderator
- */
-export const isModerator = ({ permissions }: GuildMember) =>
-	permissions
-		.toArray()
-		.some(permission => moderatorPermissions.includes(permission))
+export const buildEmbed = async (
+	user: User | GuildMember,
+	client: Client,
+	restOptions
+) => {
+	const { displayAvatarURL, username } = await client.fetchUser(user.id)
+	return {
+		...restOptions,
+		author: {
+			iconURL: displayAvatarURL,
+			name: username,
+		},
+		timestamp: new Date(),
+	}
+}
 /**
  * Returns the help embed for the given command
  */
