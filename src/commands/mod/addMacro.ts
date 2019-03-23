@@ -1,7 +1,7 @@
 import { Command } from 'discord-akairo'
 import { Message } from 'discord.js'
-import { ToikoClient } from '../client'
-import { createMacro } from '../utils/db'
+import { ToikoClient } from '../../client'
+import { createMacro } from '../../utils/db'
 
 export default class extends Command {
 	constructor() {
@@ -12,7 +12,9 @@ export default class extends Command {
 				{ id: 'category', type: 'string' },
 				{ id: 'response', type: 'string', match: 'rest' },
 			],
+			category: 'mod',
 			description: {
+				content: 'Adds a macro',
 				example: '$addmacro ping fun Hello! Ping pong!',
 				usage: '$addmacro <name> <category> <response>',
 			},

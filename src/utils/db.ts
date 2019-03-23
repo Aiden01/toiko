@@ -46,3 +46,9 @@ export const getMacro = (query: IMacro, connection: Connection) =>
  */
 export const getAllMacros = (guildId: string, connection: Connection) =>
 	connection.getRepository(Macro).find({ guildId })
+
+/**
+ * Removes macro
+ */
+export const removeMacro = (query: IMacro, connection: Connection) =>
+	connection.getRepository(Macro).delete({ ...query })

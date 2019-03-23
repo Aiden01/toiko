@@ -22,7 +22,8 @@ export default class extends Listener {
 				message,
 				client.commandHandler.prefix as string
 			)
-			if (command) {
+
+			if (command || !alias) {
 				return
 			}
 			const macro = await getMacro(
