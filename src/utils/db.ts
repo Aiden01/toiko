@@ -11,8 +11,9 @@ export const getGuild = (guildId: string, connection: Connection) =>
  * Creates new guild
  */
 export const createGuild = (guildId: string, connection: Connection) => {
-	let guild = new Guild()
-	guild = { ...guild, ...defaultSettings, guildId }
+	const guild = new Guild()
+	guild.prefix = defaultSettings.prefix
+	guild.guildId = guildId
 	const repository = connection.getRepository(Guild)
 	return repository.save(guild)
 }

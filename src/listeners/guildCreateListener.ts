@@ -3,7 +3,7 @@ import { Guild } from 'discord.js'
 import { ToikoClient } from '../client'
 import { createGuild } from '../utils/db'
 
-export class GuildCreateListener extends Listener {
+export default class extends Listener {
 	constructor() {
 		super('guildCreate', {
 			emitter: 'client',

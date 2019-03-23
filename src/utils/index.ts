@@ -1,5 +1,11 @@
 import { Command } from 'discord-akairo'
+import { GuildMember, User } from 'discord.js'
 import * as R from 'ramda'
+
+/**
+ * Returns mention string from a user
+ */
+export const getUserMention = (user: User | GuildMember) => `<@${user.id}>`
 
 /**
  * Returns the help embed for the given command

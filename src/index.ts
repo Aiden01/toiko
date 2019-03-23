@@ -6,7 +6,8 @@ import { ToikoClient } from './client'
 const client = new ToikoClient(
 	{
 		allowMention: true,
-		commandDirectory: './dist/src/commands/',
+		commandDirectory: './build/src/commands/',
+		listenerDirectory: './build/src/listeners/',
 		ownerID: '337364150080503809',
 		prefix: '?',
 	},
@@ -20,7 +21,7 @@ createConnection({
 	entities: [__dirname + '/entity/*.ts'],
 	host: 'localhost',
 	password: POSTGRES_PASSWORD,
-	port: 3306,
+	port: 5432,
 	synchronize: true,
 	type: 'postgres',
 	username: POSTGRES_USER,

@@ -1,11 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
 export const defaultSettings = {
 	prefix: '?',
 }
 
 @Entity()
-export class Guild {
+export class Guild extends BaseEntity {
 	@PrimaryGeneratedColumn()
 	public id: number
 
