@@ -12,7 +12,7 @@ export default class extends Command {
 			],
 			category: 'mod',
 			description: {
-				content: 'Remove the given macro',
+				content: 'Removes the given macro',
 				example: '$removemacro hello',
 				usage: '$removemacro <macro>'
 			},
