@@ -12,7 +12,9 @@ export default class extends Command {
                 { type: 'string', id: 'reason', match: 'rest' }
             ],
             category: 'mod',
+            channelRestriction: 'guild',
             description: 'Warns a user',
+            userPermissions: ['MANAGE_MESSAGES'],
         })
     }
 
