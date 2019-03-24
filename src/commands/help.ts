@@ -39,7 +39,7 @@ export default class extends Command {
 
 			const commandsEmbed = await buildEmbed(author, this.client, {
 				description:
-					'Type $help <command> to get more information about a command',
+					'tteeest Type $help <command> to get more information about a command',
 				fields: commands,
 			})
 
