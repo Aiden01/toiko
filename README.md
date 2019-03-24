@@ -41,7 +41,10 @@ npm run build
 yarn build
 ```
 - Docker
-> WIP
+
+```
+docker-compose up --build -d
+```
 
 ## Adding custom commands (Macro)
 
