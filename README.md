@@ -5,6 +5,9 @@ A multi-purpose Discord bot that helps you manage your server
 
 ![avatar](https://media.discordapp.net/attachments/482888162008629251/557909358910898187/98c77dffae4d4f41e84082100535fc57.jpg)
 
+## Adding Toiko to your server
+If you want to add Toiko to your server, you can use [this link](https://discordapp.com/oauth2/authorize?client_id=557651518862655502&scope=bot&permissions=8)
+
 
 ## Development
 
