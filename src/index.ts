@@ -8,7 +8,7 @@ import {
 } from '../config.json'
 import { ToikoClient } from './client'
 
-const client = new ToikoClient({ ownerID: ['337364150080503809'] })
+const client = new ToikoClient({ ownerID: ['337364150080503809', '481284371312279573'] })
 async function main() {
 	let retries = 5
 	while(retries) {
