@@ -1,6 +1,26 @@
-import { Connection } from 'typeorm'
+import { Connection, createConnection, ConnectionOptions } from 'typeorm'
 import { defaultSettings, Guild } from '../entity/Guild'
 import { IMacro, Macro } from '../entity/Macro'
+
+/**
+ * Creates connection to the database
+ */
+export const connect = async (options: ConnectionOptions) => {
+	let retries = 5
+	let connection: Connection
+	while (retries) {
+		try {
+			connection = await createConnection(options)
+		} catch (e) {
+			/* tslint:disable */
+			console.error(e)
+			retries--
+			console.log(`${retries} retries left.`)
+			await new Promise(resolve => setTimeout(resolve, 5000))
+		}
+	}
+	return connection
+}
 
 /**
  * Returns guild with the given id from the database
