@@ -1,6 +1,6 @@
-import { Command } from 'discord-akairo'
-import { Client, GuildMember, RichEmbedOptions, User } from 'discord.js'
-import { EMBEDS_COLOR } from '../../config.json'
+import { Command } from 'discord-akairo';
+import { Client, GuildMember, RichEmbedOptions, User } from 'discord.js';
+import { getConfig } from './config';
 
 /**
  * Builds an embed with default fields
@@ -10,7 +10,7 @@ export const buildEmbed = async (
 	client: Client,
 	restOptions: RichEmbedOptions
 ) => {
-	const { displayAvatarURL, username } = await client.fetchUser(user.id)
+	const { displayAvatarURL, username } = await client.fetchUser(user.id);
 
 	return {
 		...restOptions,
@@ -18,10 +18,10 @@ export const buildEmbed = async (
 			icon_url: displayAvatarURL,
 			name: username,
 		},
-		color: parseInt(EMBEDS_COLOR.slice(1), 16),
+		color: parseInt(getConfig('EMBEDS_COLOR', '#ffffff').slice(1), 16),
 		timestamp: new Date(),
-	}
-}
+	};
+};
 /**
  * Returns the help embed for the given command
  */
@@ -51,5 +51,5 @@ export const buildCommandHelp = (
 			},
 		],
 		title: id,
-	})
-}
+	});
+};
