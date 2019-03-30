@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { TOKEN } from '../config.json'
 import { ToikoClient } from './client'
-import { connect } from './utils/db.js'
+import { connect } from './utils/db'
 
 const client = new ToikoClient({
 	ownerID: ['337364150080503809', '481284371312279573'],

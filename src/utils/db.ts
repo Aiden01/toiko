@@ -1,4 +1,4 @@
-import { Connection, createConnection, ConnectionOptions } from 'typeorm'
+import { Connection, ConnectionOptions, createConnection } from 'typeorm'
 import { defaultSettings, Guild } from '../entity/Guild'
 import { IMacro, Macro } from '../entity/Macro'
 
