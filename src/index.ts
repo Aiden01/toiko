@@ -3,13 +3,12 @@ import { ToikoClient } from './client';
 import { connect } from './utils/db';
 import { loadConfig, getConfig } from './utils/config';
 
-const client = new ToikoClient({
-	ownerID: ['337364150080503809', '481284371312279573'],
-});
-
 (async function main() {
 	try {
 		await loadConfig('.env');
+		const client = new ToikoClient({
+			ownerID: ['337364150080503809', '481284371312279573'],
+		});
 		const connection = await connect({
 			database: getConfig('DATABASE_NAME'),
 			entities: [__dirname + '/entity/*.ts'],
