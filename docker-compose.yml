@@ -1,4 +1,4 @@
-version: "3.7"
+version: '3.7'
 # list all the containers
 services:
   # database
@@ -9,7 +9,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_DB: toiko
     volumes:
-      - /pgdata:/var/lib/postgresql/data
+      - /tmp/pgdata:/var/lib/postgresql/data
     ports:
       - '5432:5432'
   toiko:
