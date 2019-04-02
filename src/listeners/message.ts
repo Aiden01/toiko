@@ -1,7 +1,7 @@
 import { Listener } from 'discord-akairo';
 import { Message } from 'discord.js';
 import { ToikoClient } from '../client';
-import { getMacro } from '../utils/db';
+import { getMacro, getGuild } from '../utils/db';
 
 export default class extends Listener {
 	constructor() {
@@ -18,6 +18,12 @@ export default class extends Listener {
 		}
 		const client = this.client as ToikoClient;
 		try {
+			const server = await getGuild(guild.id, client.database);
+			if (!server || !server.prefix) {
+				/* tslint:disable */
+				return console.log('Server not registered');
+			}
+			client.commandHandler.prefix = server.prefix;
 			const { command, alias }: any = client.commandHandler.parseWithPrefix(
 				message,
 				client.commandHandler.prefix as string

@@ -6,9 +6,7 @@ import {
 } from 'discord-akairo';
 import * as path from 'path';
 import { Connection } from 'typeorm';
-import { Message } from 'discord.js';
 import { getConfig } from './utils/config';
-import { getGuild } from './utils/db';
 
 export class ToikoClient extends AkairoClient {
 	public database: Connection;
@@ -24,13 +22,7 @@ export class ToikoClient extends AkairoClient {
 			commandUtil: true,
 			directory: path.join(__dirname, 'commands'),
 			handleEdits: true,
-			prefix: async (message: Message) => {
-				const guild = await getGuild(message.guild.id, this.database);
-				if (!guild || !guild.prefix) {
-					return getConfig('PREFIX', '$');
-				}
-				return guild.prefix;
-			},
+			prefix: getConfig('PREFIX', '$'),
 		});
 
 		this.listenerHandler = new ListenerHandler(this, {
